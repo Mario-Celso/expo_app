@@ -1,47 +1,45 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, ImageBackground } from 'react-native';
 import { useNavigation } from "@react-navigation/native"
-const navigation = useNavigation()
 
-export default class Home extends React.Component {
-    state = {
-        email: "",
-        password: ""
-    }
+export default function Home() {
+    const navigation = useNavigation()
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
 
-    render() {
-        return (
-            <ImageBackground source={require('../assets/houseflix_fundo.png')} style={styles.container}>
-                <View style={styles.inputView1} >
-                    <TextInput
-                        style={styles.inputText}
-                        placeholder="Email..."
-                        placeholderTextColor="#003f5c"
-                        onChangeText={text => this.setState({ email: text })} />
-                </View>
-                <View style={styles.inputView} >
-                    <TextInput
-                        secureTextEntry
-                        style={styles.inputText}
-                        placeholder="Senha..."
-                        placeholderTextColor="#003f5c"
-                        onChangeText={text => this.setState({ password: text })} />
-                </View>
+    return (
+        <ImageBackground source={require('../assets/houseflix_fundo.png')} style={styles.container}>
+            <View style={styles.inputView1} >
+                <TextInput
+                    value={email}
+                    style={styles.inputText}
+                    placeholder="Email..."
+                    placeholderTextColor="#003f5c"
+                    onChangeText={text => setEmail(text)} />
+            </View>
+            <View style={styles.inputView} >
+                <TextInput
+                    value={password}
+                    secureTextEntry
+                    style={styles.inputText}
+                    placeholder="Senha..."
+                    placeholderTextColor="#003f5c"
+                    onChangeText={text => setPassword(text)} />
+            </View>
 
-                <TouchableOpacity
-                    style={styles.loginBtn}
-                    onPress={() => navigation.navigate('Dashboard')}
-                >
-                    <Text style={styles.loginText}>ENTRAR</Text>
-                </TouchableOpacity>
-                <TouchableOpacity>
-                    <Text style={styles.forgot}>Esqueceu a senha?</Text>
-                </TouchableOpacity>
-            </ImageBackground>
-        );
-    }
-}
-    
+            <TouchableOpacity
+                style={styles.loginBtn}
+                onPress={() => navigation.navigate('Index')}
+            >
+                <Text style={styles.loginText}>ENTRAR</Text>
+            </TouchableOpacity>
+            <TouchableOpacity>
+                <Text style={styles.forgot}>Esqueceu a senha?</Text>
+            </TouchableOpacity>
+        </ImageBackground>
+    );
+}  
+
 const styles = StyleSheet.create({
     container: {
         flex: 1,
